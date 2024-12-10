@@ -1,0 +1,26 @@
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpass
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    depends_on:
+      - mongo
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb+srv://matuzalembatista:Matuza1995@cluster0.otw9c.mongodb.net/
+      ME_CONFIG_BASICAUTH: true
+      ME_CONFIG_MONGODB_ADMINUSERNAME: 
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 
+      ME_CONFIG_BASICAUTH_USERNAME: matuzalembatista
+      ME_CONFIG_BASICAUTH_PASSWORD: matuzalembatista
+    ports:
+      - "8001:8081"
